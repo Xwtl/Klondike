@@ -269,7 +269,7 @@
       --text-primary: #fdf2f8;
       --text-muted: #fecdd3;
       --text-on-accent: #3b0764;
-      --text-win: #be185d;
+      --text-win: rgb(255, 255, 255);
 
       --card-front-top: #fff8eb;
       --card-front-bottom: #fffcf2;
@@ -295,9 +295,9 @@
       --pip-shadow: 0 0px 0px rgba(148, 27, 74, 0.6);
 
       --pile-bg-main: rgba(255, 231, 244, 0.96);
-      --pile-bg-highlight: rgba(255, 241, 247, 0.96);
-      --pile-stock-waste-bg: rgba(255, 231, 244, 0.96);
-      --pile-inner-border: rgba(248, 187, 208, 0.9);
+      --pile-bg-highlight: rgba(255, 241, 247, 0.7);
+      --pile-stock-waste-bg: rgba(255, 231, 244, 0.25);
+      --pile-inner-border: rgba(248, 187, 208, 0.3);
       }
 
     body.theme-ashen {
@@ -956,12 +956,12 @@
     };
 
     const THEMES = [
-      { id: "neon", name: "Neon Night", preview: "#14489c" },
-      { id: "sunset", name: "Solar Sunset", preview: "#f97316" },
-      { id: "classic", name: "Classic Casino", preview: "#16a34a" },
-      { id: "pink", name: "Pink Licorice", preview: "#ec4899" },
-      { id: "ashen", name: "Ashen Ember", preview: "#b91c1c" },
-      { id: "midnight", name: "Midnight Purple", preview: "#a855f7" },
+      { id: "neon", name: "Midnight", preview: "#14489c" },
+      { id: "sunset", name: "Sunset", preview: "#f97316" },
+      { id: "classic", name: "Casino", preview: "#16a34a" },
+      { id: "pink", name: "Cherry", preview: "#ec4899" },
+      { id: "ashen", name: "Ember", preview: "#b91c1c" },
+      { id: "midnight", name: "Purple", preview: "#a855f7" },
     ];
 
     const THEME_STORAGE_KEY = "solitaire-theme";
@@ -1267,7 +1267,7 @@
       dragState = null;
       pendingDrag = null;
       previousState = null;
-      statusEl.textContent = "";
+      statusEl.textContent = "You win!";
 
       let index = 0;
       for (let col = 0; col < 7; col++) {
