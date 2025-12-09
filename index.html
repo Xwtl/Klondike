@@ -405,6 +405,7 @@
         0 0 0 1px var(--border-outer-strong);
       border: 1px solid var(--border-soft);
       overflow: auto;
+      touch-action: none;
     }
 
     .top-bar {
@@ -785,6 +786,19 @@
     }
 
     @media (max-width: 900px) {
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100dvh;
+        overflow: hidden;
+      }
+
+      body {
+        display: block; 
+        background: none; 
+      }
+
       :root {
           --safe-width: calc(100vw - 36px);
           --card-width: calc(var(--safe-width) / 8.05);
@@ -799,6 +813,9 @@
             width: 100vw;
             height: 100dvh;
             border-radius: 0;
+            margin: 0;
+            box-shadow: none;
+            border: none;
         }
 
         .top-row,
@@ -1011,6 +1028,9 @@
 
       document.addEventListener("mousemove", onMouseMove);
       document.addEventListener("mouseup", onMouseUp);
+      document.addEventListener("touchmove", onTouchMove, { passive: false });
+      document.addEventListener("touchend", onTouchEnd, { passive: false });
+      document.addEventListener("touchcancel", onTouchEnd, { passive: false });
 
       initThemeSystem();
       initPipModeSystem();
@@ -1323,6 +1343,7 @@
       el.dataset.cardId = card.id;
       el.addEventListener("mousedown", onCardMouseDown);
       el.addEventListener("dblclick", onCardDoubleClick);
+      el.addEventListener("touchstart", onCardTouchStart, { passive: false });
 
       return el;
     }
@@ -1766,6 +1787,46 @@
           break;
         }
       }
+    }
+
+    function onCardTouchStart(e) {
+      if (e.touches.length > 1) return;
+      const t = e.touches[0];
+      if (!t) return;
+      e.preventDefault();
+      const cardEl = e.currentTarget;
+      onCardMouseDown({
+        button: 0,
+        preventDefault: () => {},
+        currentTarget: cardEl,
+        clientX: t.clientX,
+        clientY: t.clientY
+      });
+    }
+
+    function onTouchMove(e) {
+      if (!pendingDrag && !dragState) return;
+      const t = e.touches[0];
+      if (!t) return;
+      e.preventDefault();
+      onMouseMove({
+        clientX: t.clientX,
+        clientY: t.clientY,
+        buttons: 1
+      });
+    }
+
+    function onTouchEnd(e) {
+      if (!pendingDrag && !dragState) return;
+      const t =
+        (e.changedTouches && e.changedTouches[0]) ||
+        (e.touches && e.touches[0]);
+      if (!t) return;
+      e.preventDefault();
+      onMouseUp({
+        clientX: t.clientX,
+        clientY: t.clientY
+      });
     }
 
     function checkForWin() {
