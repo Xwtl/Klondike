@@ -282,7 +282,7 @@
 
       --border-soft: rgba(248, 187, 208, 0.8);
       --border-strong: rgba(249, 168, 212, 0.0);
-      --border-outer-strong: rgba(190, 24, 93, 0.5);
+      --border-outer-strong: rgba(255, 93, 187, 0.5);
       --text-primary: #fdf2f8;
       --text-muted: #fecdd3;
       --text-on-accent: #3b0764;
@@ -291,8 +291,8 @@
       --card-front-top: #fff8eb;
       --card-front-bottom: #fffcf2;
 
-      --card-back-base: #2e0e21;
-      --card-back-glow: #201603;
+      --card-back-base: #f05092d5;
+      --card-back-glow: rgba(46, 36, 28, 0.5);
       --card-back-border: #f9a8d4;
       --card-back-inner-border: rgba(244, 114, 182, 0.85);
 
@@ -308,7 +308,7 @@
 
       --shadow-strong: rgba(148, 27, 74, 0.45);
       --shadow-soft: rgba(148, 27, 74, 0.25);
-      --shadow-card: rgba(148, 27, 74, 0.35);
+      --shadow-card: rgba(148, 27, 74, 0.15);
       --pip-shadow: 0 0px 0px rgba(148, 27, 74, 0.6);
 
       --pile-bg-main: rgba(255, 231, 244, 0.96);
@@ -668,7 +668,7 @@
       position: absolute;
       width: var(--card-width);
       height: var(--card-height);
-      border-radius: 10px;
+      border-radius: 6px;
       box-shadow:
         0 10px 20px var(--shadow-card),
         0 0 0 1px var(--border-outer-strong);
@@ -688,16 +688,12 @@
       background:
         radial-gradient(circle at 20% 20%, var(--card-back-glow), rgba(15, 23, 42, 0.7)),
         linear-gradient(145deg, var(--card-back-base), var(--card-back-base));
-      border: 2px solid var(--card-back-border);
       overflow: hidden;
     }
 
     .card-back::before {
       content: "";
       position: absolute;
-      inset: 10%;
-      border-radius: 8px;
-      border: 2px dashed var(--card-back-inner-border);
       opacity: 0.9;
     }
 
@@ -784,14 +780,19 @@
       transform: translateX(0);
     }
 
+    #undo-button-text {
+      display: block;
+    }
+
     @media (max-width: 900px) {
-        :root {
-            --card-width: 70px;
-            --card-height: 100px;
-            --pile-gap: 12px;
-            --tableau-offset-faceup: 22px;
-            --tableau-offset-facedown: 10px;
-            --waste-gap: 20px;
+      :root {
+          --safe-width: calc(100vw - 36px);
+          --card-width: calc(var(--safe-width) / 8.05);
+          --card-height: calc(var(--card-width) * 1.5);
+          --pile-gap: calc(var(--card-width) * 0.175);
+          --tableau-offset-faceup: calc(var(--card-height) * 0.267);   
+          --tableau-offset-facedown: calc(var(--card-height) * 0.1);   
+          --waste-gap: calc(var(--card-width) * 0.5);
         }
 
         .game {
@@ -806,8 +807,82 @@
         }
 
         #status {
-            font-size: 16px;
+            font-size: 14px;
         }
+
+        .card {
+          box-shadow:
+            0 4px 10px var(--shadow-card),
+            0 0 0 1px var(--border-outer-strong);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: grab;
+          transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+          transform-origin: center center;
+        }
+
+        .card .pip {
+          font-size: calc(var(--card-width) * 0.3);
+          opacity: 0.22;
+        }
+
+        .card .corner span.rank {
+          display: block;
+          font-size: calc(var(--card-width) * 0.25);
+          margin-bottom: 1px;
+        }
+
+        .card .corner span.suit {
+          display: block;
+          font-size: calc(var(--card-width) * 0.25);
+        }
+
+        .card-back {
+          background:
+            radial-gradient(circle at 20% 20%, var(--card-back-glow), rgba(15, 23, 42, 0.7)),
+            linear-gradient(145deg, var(--card-back-base), var(--card-back-base));
+          overflow: hidden;
+        }
+
+        .pile.foundation::before {
+          content: attr(data-suit);
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          font-size: 22px;
+          opacity: 0.2;
+          pointer-events: none;
+          color: var(--text-muted);
+        }
+
+        #undo-button-text {
+          display: none;
+        }
+
+        .chip-button-label {
+          display: none;
+        }
+
+        .chip-button {
+          padding: 8px 14px;
+          font-size: 12px;
+        }
+
+        #new-game {
+          padding: 6px 14px;
+          font-size: 12px;
+        }
+
+        .top-bar {
+          gap: 0px;
+        }
+
+        .top-bar-actions {
+          gap: 4px;
+        }
+
     }
   </style>
 </head>
@@ -815,8 +890,8 @@
   <div class="game">
     <div class="top-bar">
       <button id="undo-button" type="button" class="chip-button">
-        <span class="icon">⟲</span>
-        <span>Undo</span>
+        <span id="undo-icon" class="icon">⟲</span>
+        <span id="undo-button-text">Undo</span>
       </button>
 
       <div id="status"></div>
@@ -937,6 +1012,11 @@
       initPipModeSystem();
       updateUndoButtonVisibility();
       startNewGame();
+
+      window.addEventListener("resize", () => {
+        if (dragState || pendingDrag) return;
+        render();
+      });
     });
 
     /* ---------- THEME SYSTEM ---------- */
@@ -1070,7 +1150,7 @@
 
       if (mode === "multi") {
         body.classList.add("pips-multi");
-        currentPipModeLabel.textContent = "Multicolor";
+        currentPipModeLabel.textContent = "Multi";
       } else {
         mode = "split";
         body.classList.add("pips-split");
@@ -1243,6 +1323,22 @@
       return el;
     }
 
+    function getCssVarPx(varName, fallback) {
+      const probe = document.createElement("div");
+      probe.style.position = "absolute";
+      probe.style.visibility = "hidden";
+      probe.style.height = `var(${varName})`;
+      document.body.appendChild(probe);
+
+      const value = parseFloat(getComputedStyle(probe).height);
+      document.body.removeChild(probe);
+
+      if (Number.isNaN(value)) {
+        return fallback;
+      }
+      return value;
+    }
+
     function renderStock() {
       stockEl.innerHTML = "";
       stockEl.classList.toggle("empty", stock.length === 0);
@@ -1270,10 +1366,7 @@
       const visibleCount = Math.min(3, available);
       const start = waste.length - visibleCount;
 
-      const gap = parseInt(
-        getComputedStyle(document.documentElement).getPropertyValue("--waste-gap") || "16",
-        10
-      );
+      const gap = getCssVarPx("--waste-gap", 16);
 
       for (let i = start; i < waste.length; i++) {
         const card = waste[i];
@@ -1288,6 +1381,7 @@
         wasteEl.appendChild(cardEl);
       }
     }
+
 
     function renderFoundations() {
       foundationEls.forEach((pileEl, i) => {
@@ -1311,15 +1405,8 @@
     }
 
     function renderTableau() {
-      const rootStyles = getComputedStyle(document.documentElement);
-      const faceDownOffset = parseInt(
-        rootStyles.getPropertyValue("--tableau-offset-facedown") || "12",
-        10
-      );
-      const faceUpOffset = parseInt(
-        rootStyles.getPropertyValue("--tableau-offset-faceup") || "26",
-        10
-      );
+      const faceDownOffset = getCssVarPx("--tableau-offset-facedown", 12);
+      const faceUpOffset = getCssVarPx("--tableau-offset-faceup", 26);
 
       tableauEls.forEach((pileEl, i) => {
         pileEl.innerHTML = "";
