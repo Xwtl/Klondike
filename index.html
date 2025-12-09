@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     :root {
-      /* Layout */
       --card-width: 90px;
       --card-height: 130px;
       --tableau-offset-faceup: 26px;
@@ -15,9 +14,6 @@
       --waste-gap: 24px;
       --transition-fast: 0.15s;
 
-      /* Default theme: Neon Night (base & fallback) */
-
-      /* Accents */
       --accent-primary: #f97316;
       --accent-primary-soft: rgba(249, 115, 22, 0.08);
       --accent-primary-strong: rgba(249, 115, 22, 0.7);
@@ -26,7 +22,6 @@
       --accent-secondary-soft: rgba(59, 130, 246, 0.2);
       --accent-secondary-strong: rgba(59, 130, 246, 0.75);
 
-      /* Neutrals / base */
       --bg-gradient-top: #030407;
       --bg-gradient-mid: #020617;
       --bg-gradient-bottom: #000000;
@@ -43,7 +38,6 @@
       --text-on-accent: #fefce8;
       --text-win: var(--accent-primary);
 
-      /* Cards (front/back) */
       --card-front-top: #020617;
       --card-front-bottom: #020b2b;
 
@@ -52,7 +46,6 @@
       --card-back-border: var(--accent-secondary-strong);
       --card-back-inner-border: rgba(59, 130, 246, 0.55);
 
-      /* Pip split & multicolor modes */
       --card-hearts-split: #f97316;
       --card-diamonds-split: #f97316;
       --card-spades-split: #e5e7eb;
@@ -63,13 +56,11 @@
       --card-spades-multi: #6092f7;
       --card-clubs-multi: rgb(100, 197, 192);
 
-      /* Active pip colors */
       --card-hearts: #f97316;
       --card-diamonds: #f97316;
       --card-spades: #e5e7eb;
       --card-clubs: #e5e7eb;
 
-      /* Shadows / pile backgrounds */
       --shadow-strong: rgba(0, 0, 0, 0.9);
       --shadow-soft: rgba(0, 0, 0, 0.6);
       --shadow-card: rgba(0, 0, 0, 0.7);
@@ -80,8 +71,6 @@
       --pile-stock-waste-bg: rgba(15, 23, 42, 0.98);
       --pile-inner-border: rgba(15, 23, 42, 0.8);
     }
-
-    /* Pip mode toggle: split (two-color) vs multicolor (four-color) */
 
     body.pips-split {
       --card-hearts: var(--card-hearts-split);
@@ -97,9 +86,6 @@
       --card-clubs: var(--card-clubs-multi);
     }
 
-    /* ---------- THEMES ---------- */
-
-    /* Classic Casino */
     body.theme-classic {
       --accent-primary: #16a34a;
       --accent-primary-soft: rgba(11, 48, 20, 0.18);
@@ -154,7 +140,6 @@
       --pile-inner-border: rgba(6, 78, 66, 0.9);
     }
 
-    /* Midnight Purple */
     body.theme-midnight {
       --accent-primary: #a855f7;
       --accent-primary-soft: rgba(168, 85, 247, 0.22);
@@ -209,7 +194,6 @@
       --pile-inner-border: rgba(15, 23, 42, 0.9);
     }
 
-    /* Solar Sunset */
     body.theme-sunset {
       --accent-primary: #f97316;
       --accent-primary-soft: rgba(249, 115, 22, 0.18);
@@ -264,7 +248,6 @@
       --pile-inner-border: rgba(15, 23, 42, 0.9);
     }
 
-    /* Pink Licorice */
     body.theme-pink {
       --accent-primary: #f472b6;
       --accent-primary-soft: rgba(53, 47, 34, 0.4);
@@ -317,7 +300,6 @@
       --pile-inner-border: rgba(248, 187, 208, 0.9);
       }
 
-    /* Ashen Ember */
     body.theme-ashen {
       --accent-primary: #ef4444;
       --accent-primary-soft: rgba(239, 68, 68, 0.22);
@@ -435,8 +417,6 @@
       flex-shrink: 0;
     }
 
-    /* Undo button */
-
     #undo-button {
       visibility: hidden;
     }
@@ -444,8 +424,6 @@
     #undo-button .icon {
       font-size: 16px;
     }
-
-    /* Theme switcher UI */
 
     .theme-switcher {
       position: relative;
@@ -795,115 +773,114 @@
       }
 
       body {
-        display: block; 
-        background: none; 
+        display: block;
+        background: none;
       }
 
       :root {
-          --safe-width: calc(100vw - 36px);
-          --card-width: calc(var(--safe-width) / 8.05);
-          --card-height: calc(var(--card-width) * 1.5);
-          --pile-gap: calc(var(--card-width) * 0.175);
-          --tableau-offset-faceup: calc(var(--card-height) * 0.267);   
-          --tableau-offset-facedown: calc(var(--card-height) * 0.1);   
-          --waste-gap: calc(var(--card-width) * 0.5);
-        }
+        --safe-width: calc(100vw - 36px);
+        --card-width: calc(var(--safe-width) / 8.05);
+        --card-height: calc(var(--card-width) * 1.5);
+        --pile-gap: calc(var(--card-width) * 0.175);
+        --tableau-offset-faceup: calc(var(--card-height) * 0.267);
+        --tableau-offset-facedown: calc(var(--card-height) * 0.1);
+        --waste-gap: calc(var(--card-width) * 0.5);
+      }
 
-        .game {
-            width: 100vw;
-            height: 100dvh;
-            border-radius: 0;
-            margin: 0;
-            box-shadow: none;
-            border: none;
-        }
+      .game {
+        width: 100vw;
+        height: 100dvh;
+        border-radius: 0;
+        margin: 0;
+        box-shadow: none;
+        border: none;
+      }
 
-        .top-row,
-        .tableau-row {
-            max-width: none;
-        }
+      .top-row,
+      .tableau-row {
+        max-width: none;
+      }
 
-        #status {
-            font-size: 14px;
-        }
+      #status {
+        font-size: 14px;
+      }
 
-        .card {
-          box-shadow:
-            0 4px 10px var(--shadow-card),
-            0 0 0 1px var(--border-outer-strong);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          cursor: grab;
-          transition: transform var(--transition-fast), box-shadow var(--transition-fast);
-          transform-origin: center center;
-        }
+      .card {
+        box-shadow:
+          0 4px 10px var(--shadow-card),
+          0 0 0 1px var(--border-outer-strong);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: grab;
+        transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+        transform-origin: center center;
+      }
 
-        .card .pip {
-          font-size: calc(var(--card-width) * 0.3);
-          opacity: 0.22;
-        }
+      .card .pip {
+        font-size: calc(var(--card-width) * 0.3);
+        opacity: 0.22;
+      }
 
-        .card .corner span.rank {
-          display: block;
-          font-size: calc(var(--card-width) * 0.25);
-          margin-bottom: 1px;
-        }
+      .card .corner span.rank {
+        display: block;
+        font-size: calc(var(--card-width) * 0.25);
+        margin-bottom: 1px;
+      }
 
-        .card .corner span.suit {
-          display: block;
-          font-size: calc(var(--card-width) * 0.25);
-        }
+      .card .corner span.suit {
+        display: block;
+        font-size: calc(var(--card-width) * 0.25);
+      }
 
-        .card-back {
-          background:
-            radial-gradient(circle at 20% 20%, var(--card-back-glow), rgba(15, 23, 42, 0.7)),
-            linear-gradient(145deg, var(--card-back-base), var(--card-back-base));
-          overflow: hidden;
-        }
+      .card-back {
+        background:
+          radial-gradient(circle at 20% 20%, var(--card-back-glow), rgba(15, 23, 42, 0.7)),
+          linear-gradient(145deg, var(--card-back-base), var(--card-back-base));
+        overflow: hidden;
+      }
 
-        .pile.foundation::before {
-          content: attr(data-suit);
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          font-size: 22px;
-          opacity: 0.2;
-          pointer-events: none;
-          color: var(--text-muted);
-        }
+      .pile.foundation::before {
+        content: attr(data-suit);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 22px;
+        opacity: 0.2;
+        pointer-events: none;
+        color: var(--text-muted);
+      }
 
-        #undo-button {
-          padding: 6px 12px;
-        }
+      #undo-button {
+        padding: 6px 12px;
+      }
 
-        #undo-button-text {
-          display: none;
-        }
+      #undo-button-text {
+        display: none;
+      }
 
-        .chip-button-label {
-          display: none;
-        }
+      .chip-button-label {
+        display: none;
+      }
 
-        .chip-button {
-          padding: 10px 12px;
-          font-size: 10px;
-        }
+      .chip-button {
+        padding: 10px 12px;
+        font-size: 10px;
+      }
 
-        #new-game {
-          padding: 6px 12px;
-          font-size: 10px;
-        }
+      #new-game {
+        padding: 6px 12px;
+        font-size: 10px;
+      }
 
-        .top-bar {
-          gap: 4px;
-        }
+      .top-bar {
+        gap: 4px;
+      }
 
-        .top-bar-actions {
-          gap: 4px;
-        }
-
+      .top-bar-actions {
+        gap: 4px;
+      }
     }
   </style>
 </head>
@@ -1004,6 +981,14 @@
     let themeToggleBtn, themeMenuEl, currentThemeNameEl;
     let pipToggleBtn, currentPipModeLabel;
 
+    let activeTouch = null;
+    let lastTapTime = 0;
+    let lastTapCardId = null;
+    let lastTapX = 0;
+    let lastTapY = 0;
+    const DOUBLE_TAP_DELAY = 200;
+    const DOUBLE_TAP_DISTANCE = 25;
+
     window.addEventListener("DOMContentLoaded", () => {
       stockEl = document.getElementById("stock");
       wasteEl = document.getElementById("waste");
@@ -1026,6 +1011,18 @@
         undoButton.addEventListener("click", onUndoClick);
       }
 
+      stockEl.addEventListener("touchstart", onStockTouchStart, { passive: false });
+      newGameBtn.addEventListener("touchstart", onButtonTouchStart, { passive: false });
+      if (undoButton) {
+        undoButton.addEventListener("touchstart", onButtonTouchStart, { passive: false });
+      }
+      if (pipToggleBtn) {
+        pipToggleBtn.addEventListener("touchstart", onButtonTouchStart, { passive: false });
+      }
+      if (themeToggleBtn) {
+        themeToggleBtn.addEventListener("touchstart", onButtonTouchStart, { passive: false });
+      }
+
       document.addEventListener("mousemove", onMouseMove);
       document.addEventListener("mouseup", onMouseUp);
       document.addEventListener("touchmove", onTouchMove, { passive: false });
@@ -1042,8 +1039,6 @@
         render();
       });
     });
-
-    /* ---------- THEME SYSTEM ---------- */
 
     function initThemeSystem() {
       if (!themeToggleBtn || !themeMenuEl) return;
@@ -1073,6 +1068,7 @@
           applyTheme(theme.id);
           closeThemeMenu();
         });
+        btn.addEventListener("touchstart", onButtonTouchStart, { passive: false });
 
         themeMenuEl.appendChild(btn);
       });
@@ -1143,11 +1139,8 @@
       try {
         localStorage.setItem(THEME_STORAGE_KEY, theme.id);
       } catch (err) {
-        // ignore
       }
     }
-
-    /* ---------- PIP MODE SYSTEM ---------- */
 
     function initPipModeSystem() {
       if (!pipToggleBtn || !currentPipModeLabel) return;
@@ -1188,13 +1181,8 @@
       try {
         localStorage.setItem(PIP_STORAGE_KEY, mode);
       } catch (err) {
-        // ignore
       }
     }
-
-    /* ---------- GAME LOGIC ---------- */
-
-    // ---- Undo system ----
 
     function cloneCard(card) {
       return { ...card };
@@ -1333,8 +1321,6 @@
         const pip = document.createElement("div");
         pip.classList.add("pip");
         pip.textContent = card.suit;
-        // To show a central pip, uncomment:
-        // el.appendChild(pip);
 
         el.appendChild(topCorner);
         el.appendChild(bottomCorner);
@@ -1343,7 +1329,9 @@
       el.dataset.cardId = card.id;
       el.addEventListener("mousedown", onCardMouseDown);
       el.addEventListener("dblclick", onCardDoubleClick);
-      el.addEventListener("touchstart", onCardTouchStart, { passive: false });
+      if (card.faceUp) {
+        el.addEventListener("touchstart", onCardTouchStart, { passive: false });
+      }
 
       return el;
     }
@@ -1406,7 +1394,6 @@
         wasteEl.appendChild(cardEl);
       }
     }
-
 
     function renderFoundations() {
       foundationEls.forEach((pileEl, i) => {
@@ -1475,6 +1462,18 @@
         wasteDrawStart = waste.length - drawCount;
       }
       render();
+    }
+
+    function onStockTouchStart(e) {
+      if (e.touches.length > 1) return;
+      e.preventDefault();
+      onStockClick();
+    }
+
+    function onButtonTouchStart(e) {
+      if (e.touches.length > 1) return;
+      e.preventDefault();
+      e.currentTarget.click();
     }
 
     function onCardMouseDown(e) {
@@ -1795,6 +1794,14 @@
       if (!t) return;
       e.preventDefault();
       const cardEl = e.currentTarget;
+      const now = Date.now();
+      activeTouch = {
+        cardEl,
+        startTime: now,
+        startX: t.clientX,
+        startY: t.clientY,
+        moved: false
+      };
       onCardMouseDown({
         button: 0,
         preventDefault: () => {},
@@ -1805,10 +1812,17 @@
     }
 
     function onTouchMove(e) {
-      if (!pendingDrag && !dragState) return;
+      if (!activeTouch && !pendingDrag && !dragState) return;
       const t = e.touches[0];
       if (!t) return;
       e.preventDefault();
+      if (activeTouch) {
+        const dx = t.clientX - activeTouch.startX;
+        const dy = t.clientY - activeTouch.startY;
+        if (Math.hypot(dx, dy) > 5) {
+          activeTouch.moved = true;
+        }
+      }
       onMouseMove({
         clientX: t.clientX,
         clientY: t.clientY,
@@ -1817,16 +1831,53 @@
     }
 
     function onTouchEnd(e) {
-      if (!pendingDrag && !dragState) return;
       const t =
         (e.changedTouches && e.changedTouches[0]) ||
         (e.touches && e.touches[0]);
-      if (!t) return;
+      if (!t) {
+        activeTouch = null;
+        return;
+      }
+      const hadInteraction = !!(activeTouch || pendingDrag || dragState);
+      if (!hadInteraction) {
+        activeTouch = null;
+        return;
+      }
       e.preventDefault();
-      onMouseUp({
-        clientX: t.clientX,
-        clientY: t.clientY
-      });
+      if (pendingDrag || dragState) {
+        onMouseUp({
+          clientX: t.clientX,
+          clientY: t.clientY
+        });
+      }
+      if (activeTouch && !activeTouch.moved && activeTouch.cardEl) {
+        const now = Date.now();
+        const dt = now - lastTapTime;
+        const dx = t.clientX - lastTapX;
+        const dy = t.clientY - lastTapY;
+        const dist = Math.hypot(dx, dy);
+        const cardId = activeTouch.cardEl.dataset.cardId;
+        if (
+          dt < DOUBLE_TAP_DELAY &&
+          dist < DOUBLE_TAP_DISTANCE &&
+          lastTapCardId === cardId
+        ) {
+          const fakeEvent = {
+            preventDefault: () => {},
+            stopPropagation: () => {},
+            currentTarget: activeTouch.cardEl
+          };
+          onCardDoubleClick(fakeEvent);
+          lastTapTime = 0;
+          lastTapCardId = null;
+        } else {
+          lastTapTime = now;
+          lastTapCardId = cardId;
+          lastTapX = t.clientX;
+          lastTapY = t.clientY;
+        }
+      }
+      activeTouch = null;
     }
 
     function checkForWin() {
